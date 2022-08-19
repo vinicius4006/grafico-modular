@@ -1,44 +1,40 @@
+import 'package:graficos_app/constants/graph_interface.dart';
 import 'package:graficos_app/model/binario.dart';
 
-class GraphController {
-  static List<Binario> getBinarioManchester(String text) {
+class Manchester implements GraficoModular {
+  static List<Binario> gerarGraficoModular(String text) {
     List<Binario> chartData = [];
     int count = 0;
     bool checkOne = true;
 
-    List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
+    final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
     checkOne = listaInt.first == 1 ? true : false;
 
     for (int element in listaInt) {
-      if (element == 1 && checkOne) {
-        checkOne = false;
-        chartData.add(Binario(count, -1));
-        chartData.add(Binario(count + 1, 1));
-        chartData.add(Binario(count + 2, 1));
-      } else if (element == 1) {
+      if (element == 1) {
         chartData.add(Binario(count * 2, -1));
         chartData.add(Binario((count * 2) + 1, -1));
         chartData.add(Binario((count * 2) + 1, 1));
-        chartData.add(Binario(count * 3, 1));
-      } else if (element == 0 && !checkOne) {
-        checkOne = true;
-        chartData.add(Binario(count, 1));
-        chartData.add(Binario(count + 1, -1));
-        chartData.add(Binario(count + 2, -1));
+        chartData.add(Binario((count * 2) + 2, 1));
       } else {
-        chartData.add(Binario(count + 2, -1));
+        chartData.add(Binario((count * 2), 1));
+        chartData.add(Binario((count * 2) + 1, 1));
+        chartData.add(Binario((count * 2) + 1, -1));
+        chartData.add(Binario((count * 2) + 2, -1));
       }
       count++;
     }
 
     return chartData;
   }
+}
 
-  static List<Binario> getBinarioPAM5(String text) {
+class PAM5 implements GraficoModular {
+  static List<Binario> gerarGraficoModular(String text) {
     List<Binario> chartData = [];
 
     List<int> listaT = [];
-    List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
+    final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
     int count = 0;
     int yCount = 0;
     if (listaInt.length % 2 != 0) {
@@ -70,11 +66,13 @@ class GraphController {
       return chartData;
     }
   }
+}
 
-  static List<Binario> getBinario4B5B(String text) {
+class B45B implements GraficoModular {
+  static List<Binario> gerarGraficoModular(String text) {
     List<Binario> chartData = [];
 
-    List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
+    final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
     int count = 0;
     int yCount = 0;
     List<int> listT = [1];

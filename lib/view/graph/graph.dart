@@ -18,11 +18,9 @@ class _GraphsState extends State<Graphs> {
   @override
   void initState() {
     _chartBinarioManchester =
-        GraphController.getBinarioManchester(formController.textField);
-    _chartBinarioPAM5 =
-        GraphController.getBinarioPAM5(formController.textField);
-    _chartBinario4B5B =
-        GraphController.getBinario4B5B(formController.textField);
+        Manchester.gerarGraficoModular(formController.textField);
+    _chartBinarioPAM5 = PAM5.gerarGraficoModular(formController.textField);
+    _chartBinario4B5B = B45B.gerarGraficoModular(formController.textField);
     super.initState();
   }
 

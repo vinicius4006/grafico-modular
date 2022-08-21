@@ -58,7 +58,9 @@ class _GraphsState extends State<Graphs> {
             const Text('PAM5',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             Text(
-              formController.textField,
+              formController.textField.length % 2 == 0
+                  ? formController.textField
+                  : 'RUÍDO',
               style: const TextStyle(fontSize: 24),
             ),
             SfCartesianChart(

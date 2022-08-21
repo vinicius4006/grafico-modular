@@ -23,6 +23,11 @@ class TextForm extends StatelessWidget {
         style: const TextStyle(fontSize: 15),
         onFieldSubmitted: (value) {
           formController.textField = value;
+          if (value.isEmpty) {
+            formController.buttonVisible.value = false;
+          } else {
+            formController.buttonVisible.value = true;
+          }
         },
       ),
     );

@@ -70,25 +70,23 @@ class B45B implements GraficoModular {
     List<Binario> chartData = [];
 
     final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
-    int count = 1;
+
+    bool changePolo = false;
     chartData.add(Binario(1, 0));
     chartData.add(Binario(2, 0));
 
     for (int element in listaInt) {
-      if (chartData.last.second == 0 && element == 1) {
-        chartData.add(Binario(chartData.last.first!, 1));
-        chartData.add(Binario(chartData.last.first! + 1, 1));
-      } else if (chartData.last.second == 1 && element == 1) {
-        chartData.add(Binario(chartData.last.first!, -1));
-        chartData.add(Binario(chartData.last.first! + 1, -1));
-      } else if (chartData.last.second == -1 && element == 1) {
+      if (element == 0) {
+        chartData
+            .add(Binario(chartData.last.first! + 1, chartData.last.second));
+      } else if (chartData.last.second! == 0) {
+        chartData.add(Binario(chartData.last.first!, changePolo ? 1 : -1));
+        chartData.add(Binario(chartData.last.first! + 1, changePolo ? 1 : -1));
+        changePolo = !changePolo;
+      } else {
         chartData.add(Binario(chartData.last.first!, 0));
         chartData.add(Binario(chartData.last.first! + 1, 0));
-      } else {
-        chartData.add(Binario(count + 2, chartData.last.second));
       }
-
-      count++;
     }
 
     return chartData;

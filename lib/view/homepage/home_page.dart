@@ -27,14 +27,20 @@ class HomePage extends StatelessWidget {
                           formController: formController,
                           textController: formController.text,
                           textInputType: TextInputType.number),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(2),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, Rotas.APP_GRAPHS);
-                          },
-                          child: const Text('Codificar')),
+                      ValueListenableBuilder(
+                        valueListenable: formController.buttonVisible,
+                        builder: (context, bool value, _) => Visibility(
+                          visible: value,
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(2),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, Rotas.APP_GRAPHS);
+                              },
+                              child: const Text('Codificar')),
+                        ),
+                      )
                     ],
                   ))
             ],

@@ -39,7 +39,12 @@ class _GraphsState extends State<Graphs> {
             const SizedBox(
               height: 30,
             ),
-            const Text('Manchester'),
+            const Text('Manchester',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              formController.textField,
+              style: const TextStyle(fontSize: 24),
+            ),
             SfCartesianChart(
               series: <StepLineSeries>[
                 StepLineSeries<Binario, int>(
@@ -50,7 +55,12 @@ class _GraphsState extends State<Graphs> {
               primaryYAxis: NumericAxis(labelFormat: '{value}V'),
               primaryXAxis: NumericAxis(labelFormat: '{value}A'),
             ),
-            const Text('PAM5'),
+            const Text('PAM5',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              formController.textField,
+              style: const TextStyle(fontSize: 24),
+            ),
             SfCartesianChart(
               series: <StepLineSeries>[
                 StepLineSeries<Binario, int>(
@@ -59,9 +69,14 @@ class _GraphsState extends State<Graphs> {
                     yValueMapper: (Binario binario, _) => binario.second)
               ],
               primaryYAxis: NumericAxis(labelFormat: '{value}V'),
-              primaryXAxis: NumericAxis(labelFormat: '*'),
+              primaryXAxis: NumericAxis(labelFormat: '{value}A'),
             ),
-            const Text('B45B'),
+            const Text('B45B',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              formController.textField,
+              style: const TextStyle(fontSize: 24),
+            ),
             SfCartesianChart(
               series: <StepLineSeries>[
                 StepLineSeries<Binario, int>(
@@ -70,7 +85,7 @@ class _GraphsState extends State<Graphs> {
                     yValueMapper: (Binario binario, _) => binario.second)
               ],
               primaryYAxis: NumericAxis(labelFormat: '{value}V'),
-              primaryXAxis: NumericAxis(labelFormat: '*'),
+              primaryXAxis: NumericAxis(labelFormat: '{value}A'),
             )
           ],
         ),

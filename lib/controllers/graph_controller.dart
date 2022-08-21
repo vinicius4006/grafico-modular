@@ -5,17 +5,14 @@ class Manchester implements GraficoModular {
   static List<Binario> gerarGraficoModular(String text) {
     List<Binario> chartData = [];
     int count = 0;
-    bool checkOne = true;
 
     final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
-    checkOne = listaInt.first == 1 ? true : false;
-
     for (int element in listaInt) {
       if (element == 1) {
         chartData.add(Binario(count * 2, -1));
         chartData.add(Binario((count * 2) + 1, -1));
         chartData.add(Binario((count * 2) + 1, 1));
-        chartData.add(Binario((count * 2) + 2, 1));
+        chartData.add(Binario(2 * (count + 1), 1));
       } else {
         chartData.add(Binario((count * 2), 1));
         chartData.add(Binario((count * 2) + 1, 1));
@@ -73,33 +70,27 @@ class B45B implements GraficoModular {
     List<Binario> chartData = [];
 
     final List<int> listaInt = text.split('').map((e) => int.parse(e)).toList();
-    int count = 0;
-    int yCount = 0;
-    List<int> listT = [1];
-    if (listaInt.length % 2 != 0) {
-      return [];
-    } else {
-      listaInt.add(0);
-      for (int element in listaInt) {
-        if (element == 1) {
-          if (listT.last == element) {
-            chartData.add(Binario(count, 0));
-          } else {
-            chartData.add(Binario(count, 1));
-          }
-        } else {
-          if (listT.last == element) {
-            chartData.add(Binario(count, 0));
-          } else {
-            chartData.add(Binario(count, 1));
-          }
-        }
+    int count = 1;
+    chartData.add(Binario(1, 0));
+    chartData.add(Binario(2, 0));
 
-        listT.add(element);
-        count++;
+    for (int element in listaInt) {
+      if (chartData.last.second == 0 && element == 1) {
+        chartData.add(Binario(chartData.last.first!, 1));
+        chartData.add(Binario(chartData.last.first! + 1, 1));
+      } else if (chartData.last.second == 1 && element == 1) {
+        chartData.add(Binario(chartData.last.first!, -1));
+        chartData.add(Binario(chartData.last.first! + 1, -1));
+      } else if (chartData.last.second == -1 && element == 1) {
+        chartData.add(Binario(chartData.last.first!, 0));
+        chartData.add(Binario(chartData.last.first! + 1, 0));
+      } else {
+        chartData.add(Binario(count + 2, chartData.last.second));
       }
-      chartData.add(Binario(count, yCount));
-      return chartData;
+
+      count++;
     }
+
+    return chartData;
   }
 }
